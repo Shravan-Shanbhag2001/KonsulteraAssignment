@@ -1,0 +1,12 @@
+{% extends 'vehicles/base.html' %}
+{% block content %}
+<h1>{{ view.object|default_if_none:"Create Vehicle" }}</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Save</button>
+</form>
+
+<a href="{% url 'vehicles:vehicle_list' %}">Back to list</a>
+{% endblock %}

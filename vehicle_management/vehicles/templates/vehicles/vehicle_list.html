@@ -1,0 +1,33 @@
+{% extends 'vehicles/base.html' %}
+{% block content %}
+<h1>Vehicle List</h1>
+
+{% if user.role == 'superadmin' %}
+    <a href="{% url 'vehicles:vehicle_create' %}">Create Vehicle</a><br><br>
+{% endif %}
+
+<table border="1">
+    <tr>
+        <th>Number</th>
+        <th>Type</th>
+        <th>Model</th>
+        <th>Actions</th>
+    </tr>
+    {% for vehicle in vehicles %}
+    <tr>
+        <td>{{ vehicle.vehicle_number }}</td>
+        <td>{{ vehicle.get_vehicle_type_display }}</td>
+        <td>{{ vehicle.vehicle_model }}</td>
+        <td>
+            <a href="{% url 'vehicles:vehicle_detail' vehicle.pk %}">View</a>
+            {% if user.role == 'superadmin' or user.role == 'admin' %}
+                | <a href="{% url 'vehicles:vehicle_update' vehicle.pk %}">Edit</a>
+            {% endif %}
+            {% if user.role == 'superadmin' %}
+                | <a href="{% url 'vehicles:vehicle_delete' vehicle.pk %}">Delete</a>
+            {% endif %}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

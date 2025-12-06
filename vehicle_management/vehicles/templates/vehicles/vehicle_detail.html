@@ -1,0 +1,11 @@
+{% extends 'vehicles/base.html' %}
+{% block content %}
+<h1>Vehicle Detail</h1>
+
+<p><strong>Number:</strong> {{ vehicle.vehicle_number }}</p>
+<p><strong>Type:</strong> {{ vehicle.get_vehicle_type_display }}</p>
+<p><strong>Model:</strong> {{ vehicle.vehicle_model }}</p>
+<p><strong>Description:</strong> {{ vehicle.vehicle_description }}</p>
+
+<a href="{% url 'vehicles:vehicle_list' %}">Back to list</a>
+{% endblock %}
